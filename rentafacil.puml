@@ -1,0 +1,115 @@
+@startuml rentafacil
+
+
+hide circle
+
+
+abstract class Vehiculo {
+    - placa: String
+    - marca: String
+    - modelo: String
+    - anio: int
+    - precioPorDia: double
+}
+
+
+class Auto {
+}
+
+
+class Moto {
+    - cilindrada: int
+@startuml rentafacil
+
+
+class CalcularCosto {
+  + calcular()
+}
+
+
+class VerificarDisponibilidad {
+  + verificar()
+}
+
+
+class ValidarLimite {
+  + validar()
+}
+
+
+class Registrar {
+  + agregar()
+}
+
+
+class Finalizar {
+  + terminar()
+}
+
+
+class EntidadSistema
+
+
+class Cliente {
+  - ID
+  - nombre
+  - DNI
+  - telefono
+}
+EntidadSistema --|> Cliente
+Cliente --|> ValidarLimite
+
+
+class Vehiculo {
+  - placa
+  - marca
+  - modelo
+  - anioFabricacion
+  - precioPorDia
+}
+EntidadSistema --|> Vehiculo
+Vehiculo --|> VerificarDisponibilidad
+
+
+class Auto
+Vehiculo --|> Auto
+
+
+class Moto {
+  - cilindradaCC
+}
+Vehiculo --|> Moto
+
+
+class Camioneta {
+  - capacidadCargaKg
+}
+Vehiculo --|> Camioneta
+
+
+class Alquiler {
+  - codigoAlquiler
+  - fechaInicio
+  - fechaFin
+  - costoTotal
+}
+EntidadSistema --|> Alquiler
+Alquiler --|> CalcularCosto
+Alquiler --|> Finalizar
+
+
+class EstadoAlquiler {
+  + cambiarActivo()
+  + cambiarFinalizado()
+}
+Alquiler *-- EstadoAlquiler
+
+
+class GestorClientes {
+  + registrarCliente()
+}
+GestorClientes --|> Registrar
+
+
+class GestorVehiculos {
+  + registrarVehiculo()
